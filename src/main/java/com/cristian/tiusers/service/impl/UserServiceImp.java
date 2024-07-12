@@ -18,6 +18,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImp implements UserService {
@@ -29,10 +31,13 @@ public class UserServiceImp implements UserService {
 
     @Override
     @Transactional
-    public Page<UserProjectionDto> getUsersByCompany(String companyName, Pageable pageable) {
-        Company company = companyRepository.findByNameLike(companyName)
+    public Page<UserProjectionDto> getUsersByCompany(Long companyId, Pageable pageable) {
+        Company company = companyRepository.findById(companyId)
                 .orElseThrow(() -> new CompanyNotFound("Company not found"));
-        return userRepository.findUsersByCompany(company.getName(), pageable);
+
+        Page<User> usersPage = userRepository.findUsersByCompanyId(company.getId(), pageable);
+
+        return usersPage.map(UserMapper::userToProjectionDto);
     }
 
     @Override

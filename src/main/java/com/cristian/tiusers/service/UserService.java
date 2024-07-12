@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface UserService {
 
-    Page<UserProjectionDto> getUsersByCompany( String companyName, Pageable pageable);
+    Page<UserProjectionDto> getUsersByCompany( Long companyId, Pageable pageable);
 
     void saveUser(UserDto userDto);
 

@@ -24,6 +24,8 @@ public class User {
     private String address;
     private String telephone;
 
+    private String position;
+
     @Column(name = "residence_city")
     private String residenceCity;
 

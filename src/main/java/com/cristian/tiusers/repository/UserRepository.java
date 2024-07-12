@@ -23,5 +23,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 
 
+    @Query(
+            """
+            SELECT u FROM User u
+            JOIN u.company c
+            WHERE c.id = :companyId
+            """
+    )
+    Page<User> findUsersByCompanyId(@Param("companyId") Long companyId, Pageable pageable);
 
 }

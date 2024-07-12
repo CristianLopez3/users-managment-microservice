@@ -7,6 +7,6 @@ public interface DepartmentService {
 
     void saveDepartment(DepartmentDto department);
 
-    void updateDepartment(Department department);
+    void updateDepartment(Long id, DepartmentDto departmentdto);
 
 }

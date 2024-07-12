@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS companies (
 
 CREATE TABLE IF NOT EXISTS departments (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
     description VARCHAR(255),
     company_id INT,
     FOREIGN KEY(company_id) REFERENCES companies(id)

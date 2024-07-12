@@ -2,7 +2,8 @@ package com.cristian.tiusers.controller;
 
 import com.cristian.tiusers.dto.UserDto;
 import com.cristian.tiusers.dto.UserProjectionDto;
-import com.cristian.tiusers.model.User;
+
+import com.cristian.tiusers.repository.CompanyRepository;
 import com.cristian.tiusers.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+    private final CompanyRepository companyRepository;
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @PostMapping()
@@ -33,13 +35,21 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<Page<UserProjectionDto>> getUsersByCompany(
-            @RequestParam String company,
+            @RequestParam Long companyId,
             @PageableDefault Pageable pageable
             ) {
-        logger.debug("Getting users by company {}", company);
-        return ResponseEntity.ok(userService.getUsersByCompany(company, pageable));
+
+        logger.debug("Getting users by company with id {}", companyId);
+
+        return ResponseEntity.ok(userService.getUsersByCompany(Long.valueOf(companyId), pageable));
     }
 
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable(name = "id") Long id) {
+        logger.debug("Deleting user with id {}", id);
+        userService.deleteUserById(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 
 }
