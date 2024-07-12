@@ -13,7 +13,20 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    private final static Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    private final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
+    @ExceptionHandler(DepartmentNotFound.class)
+    public ResponseEntity<ApiError> departmentNotFound(DepartmentNotFound ex, HttpServletRequest request) {
+        logger.warn("Department not found");
+        ApiError apiError = new ApiError(
+                request.getRequestURI(),
+                ex.getMessage(),
+                HttpStatus.NOT_FOUND.value(),
+                LocalDateTime.now()
+        );
+        return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
+    }
+
 
     @ExceptionHandler(CompanyNotFound.class)
     public ResponseEntity<ApiError> companyNotFound(CompanyNotFound ex, HttpServletRequest request) {
@@ -25,7 +38,6 @@ public class GlobalExceptionHandler {
                 LocalDateTime.now()
         );
         return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
-
     }
 
     @ExceptionHandler(Exception.class)

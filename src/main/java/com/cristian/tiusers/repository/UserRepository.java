@@ -1,5 +1,6 @@
 package com.cristian.tiusers.repository;
 
+import com.cristian.tiusers.dto.UserProjectionDto;
 import com.cristian.tiusers.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,12 +14,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(
             """
-            SELECT u FROM User u
+            SELECT u.id, u.name,  u.lastname, u.telephone, u.state, u.department.name FROM User u
             JOIN u.company c
             WHERE c.name = :company
             """
     )
-    Page<User> findUsersByCompany(Pageable pageable, @Param("company") String company);
+    Page<UserProjectionDto> findUsersByCompany(@Param("company") String company, Pageable pageable);
 
 
 
