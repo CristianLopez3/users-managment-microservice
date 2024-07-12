@@ -1,29 +1,45 @@
 package com.cristian.tiusers.controller;
 
+import com.cristian.tiusers.dto.UserDto;
+import com.cristian.tiusers.dto.UserProjectionDto;
 import com.cristian.tiusers.model.User;
 import com.cristian.tiusers.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
 public class UserController {
 
-
-    public final UserService userService;
+    private final UserService userService;
+    private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @PostMapping()
-    public ResponseEntity<String> saveUser(@RequestBody User user) {
+    public ResponseEntity<String> saveUser(@RequestBody UserDto user) {
+        logger.debug("Saving user {}", user);
         userService.saveUser(user);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body("user created successful");
     }
+
+    @GetMapping
+    public ResponseEntity<Page<UserProjectionDto>> getUsersByCompany(
+            @RequestParam String company,
+            @PageableDefault Pageable pageable
+            ) {
+        logger.debug("Getting users by company {}", company);
+        return ResponseEntity.ok(userService.getUsersByCompany(company, pageable));
+    }
+
+
 
 }
