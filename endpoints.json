@@ -1,0 +1,315 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2024-07-12T18:36:32.869Z",
+  "__export_source": "insomnia.desktop.app:v9.3.2",
+  "resources": [
+    {
+      "_id": "req_e0c145dc67db4f0297cf7cecdec6d850",
+      "parentId": "fld_723a97b599b5495ea96bf0655b1c4140",
+      "modified": 1720802544427,
+      "created": 1720802258620,
+      "url": "http://localhost:8080/api/v1/departments/1",
+      "name": "Update department",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"Finanzas Comerciales\",\n\t\"description\": \"departamento encargado de las finanzas globalmente.\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/9.3.2"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1720802258620,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_723a97b599b5495ea96bf0655b1c4140",
+      "parentId": "wrk_120876c2c54b4150bafcb47c7081dfb3",
+      "modified": 1720727096578,
+      "created": 1720727096578,
+      "name": "department",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1720727096578,
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_120876c2c54b4150bafcb47c7081dfb3",
+      "parentId": null,
+      "modified": 1720715855625,
+      "created": 1720715855625,
+      "name": "Users microservice",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_1c81ed0278f04186bdf5f5fda9f0d9c5",
+      "parentId": "fld_723a97b599b5495ea96bf0655b1c4140",
+      "modified": 1720794990299,
+      "created": 1720733605810,
+      "url": "http://localhost:8080/api/v1/departments",
+      "name": "Create department",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"Finanzas\",\n\t\"description\": \"departamento encargado de las finanzas globalmente.\",\n\t\"companyId\": 2\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/9.3.2"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1720733617598,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_6e0f59e04da043c59845b6f8b92cc680",
+      "parentId": "fld_0c6d0782990d4538b5848d121805e340",
+      "modified": 1720801820474,
+      "created": 1720801616622,
+      "url": "http://localhost:8080/api/v1/users/1",
+      "name": "Delete mapping",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/9.3.2"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1720801616622,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_0c6d0782990d4538b5848d121805e340",
+      "parentId": "wrk_120876c2c54b4150bafcb47c7081dfb3",
+      "modified": 1720727071761,
+      "created": 1720727071761,
+      "name": "user",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1720727071761,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_b9c4fb9c6615478f8733547d743780a3",
+      "parentId": "fld_0c6d0782990d4538b5848d121805e340",
+      "modified": 1720801122864,
+      "created": 1720796746501,
+      "url": "http://localhost:8080/api/v1/users?companyId=2",
+      "name": "Get users by company",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair-empty",
+          "name": "",
+          "value": "",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/9.3.2"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1720796746501,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_f1af73d45db546fb85c2bd482d87d0b1",
+      "parentId": "fld_0c6d0782990d4538b5848d121805e340",
+      "modified": 1720800019426,
+      "created": 1720715862424,
+      "url": "http://localhost:8080/api/v1/users",
+      "name": "Create User",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"Chris\",\n\t\"lastname\": \"Brown\",\n\t\"address\": \"Mid Street \",\n\t\"position\": \"Talent Manager\",\n\t\"telephone\": \"3231234212\",\n\t\"residenceCity\": \"New York\",\n\t\"state\": true,\n\t\"companyId\": 1,\n\t\"departmentId\": 1\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/9.3.2"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1720727090928,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_733e91dff442411c8b1e8ff282b9a9e5",
+      "parentId": "fld_7ccdf4cec5e24b73b985d97542ea28d2",
+      "modified": 1720735283003,
+      "created": 1720735235784,
+      "url": "http://localhost:8080/api/v1/companies?page=0",
+      "name": "Get all companies",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/9.3.2"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1720735235784,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_7ccdf4cec5e24b73b985d97542ea28d2",
+      "parentId": "wrk_120876c2c54b4150bafcb47c7081dfb3",
+      "modified": 1720727062549,
+      "created": 1720727062549,
+      "name": "company",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1720727062549,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_c2fe6d2d1076406c896803d7c8f037af",
+      "parentId": "fld_7ccdf4cec5e24b73b985d97542ea28d2",
+      "modified": 1720733538705,
+      "created": 1720716120309,
+      "url": "http://localhost:8080/api/v1/companies",
+      "name": "Create Company",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"Fake Name\",\n\t\"address\": \"Calle 28\",\n\t\"operationCity\": \"Fake City\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/9.3.2"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1720727065889,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_90907ab37e6647fd33b7dbf10a01e87cbb97fe95",
+      "parentId": "wrk_120876c2c54b4150bafcb47c7081dfb3",
+      "modified": 1720715855629,
+      "created": 1720715855629,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1720715855629,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_90907ab37e6647fd33b7dbf10a01e87cbb97fe95",
+      "parentId": "wrk_120876c2c54b4150bafcb47c7081dfb3",
+      "modified": 1720715855631,
+      "created": 1720715855631,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    }
+  ]
+}
