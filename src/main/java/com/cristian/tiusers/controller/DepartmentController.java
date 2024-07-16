@@ -16,7 +16,7 @@ public class DepartmentController {
     private final DepartmentService departmentService;
 
     @PostMapping
-    public ResponseEntity<String> saveCompany(@RequestBody @Valid DepartmentDto departmentDto) {
+    public ResponseEntity<String> saveDepartment(@RequestBody @Valid DepartmentDto departmentDto) {
         departmentService.saveDepartment(departmentDto);
         return ResponseEntity.
                 status(HttpStatus.CREATED)
@@ -24,11 +24,16 @@ public class DepartmentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateCompany( @PathVariable Long id, @RequestBody @Valid DepartmentDto departmentDto) {
+    public ResponseEntity<String> updateDepartment( @PathVariable Long id, @RequestBody @Valid DepartmentDto departmentDto) {
         departmentService.updateDepartment(id, departmentDto);
         return ResponseEntity.ok("department updated successfully");
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DepartmentDto> getDepartmentById( @PathVariable Long id) {
+        DepartmentDto department = departmentService.getDepartmentById(id);
+        return ResponseEntity.ok(department);
+    }
 
 
 }

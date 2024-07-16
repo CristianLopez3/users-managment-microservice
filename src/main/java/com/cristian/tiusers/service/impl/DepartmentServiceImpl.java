@@ -55,5 +55,12 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     }
 
+    @Override
+    public DepartmentDto getDepartmentById(Long id) {
+        Department department = departmentRepository.findById(id)
+                .orElseThrow(() ->  new DepartmentNotFound("Department with id: "+id+" not found"));
+        return DepartmentMapper.departmentToDto(department);
+    }
+
 
 }

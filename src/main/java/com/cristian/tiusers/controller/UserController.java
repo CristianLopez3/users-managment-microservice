@@ -30,7 +30,7 @@ public class UserController {
         userService.saveUser(user);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body("user created successful");
+                .body("user saved successfully");
     }
 
     @GetMapping

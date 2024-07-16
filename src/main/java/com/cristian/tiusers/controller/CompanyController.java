@@ -23,7 +23,10 @@ public class CompanyController {
     private final CompanyService companyService;
     private final Logger logger = LoggerFactory.getLogger(CompanyController.class);
 
-    @PostMapping
+    @PostMapping(
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
     public ResponseEntity<String> saveCompany(@RequestBody CompanyDto companyDto) {
         logger.info("Save company: {}", companyDto);
         companyService.saveCompany(companyDto);
