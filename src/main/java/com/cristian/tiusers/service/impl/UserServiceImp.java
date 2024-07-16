@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class UserServiceImp implements UserService {
     @Transactional
     public Page<UserProjectionDto> getUsersByCompany(Long companyId, Pageable pageable) {
         Company company = companyRepository.findById(companyId)
-                .orElseThrow(() -> new CompanyNotFound("Company not found"));
+                .orElseThrow(() -> new CompanyNotFound(String.format("Company with id %d not found", companyId)));
 
         Page<User> usersPage = userRepository.findUsersByCompanyId(company.getId(), pageable);
 

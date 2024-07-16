@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(CompanyNotFound.class)
     public ResponseEntity<ApiError> companyNotFound(CompanyNotFound ex, HttpServletRequest request) {
-        logger.warn("Company with");
+        logger.warn(ex.getMessage());
         ApiError apiError = new ApiError(
                 request.getRequestURI(),
                 ex.getMessage(),

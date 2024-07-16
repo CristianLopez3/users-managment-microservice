@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
-    private final CompanyRepository companyRepository;
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @PostMapping()

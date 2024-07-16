@@ -14,17 +14,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(
             """
-            SELECT u.id, u.name,  u.lastname, u.telephone, u.state, u.department.name FROM User u
-            JOIN u.company c
-            WHERE c.name = :company
-            """
-    )
-    Page<UserProjectionDto> findUsersByCompany(@Param("company") String company, Pageable pageable);
-
-
-
-    @Query(
-            """
             SELECT u FROM User u
             JOIN u.company c
             WHERE c.id = :companyId
