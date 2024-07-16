@@ -1,33 +1,29 @@
-package com.cristian.tiusers.step;
-
+package com.cristian.tiusers.steps;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.ScenarioScope;
-import jakarta.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpStatusCode;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ScenarioScope
 public class ApplicationVersion {
 
+    @LocalServerPort
+    private int port;
 
+    @Autowired
     private TestRestTemplate restTemplate;
+
     private ResponseEntity<String> response;
-
-    @Inject
-    public ApplicationVersion(TestRestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
-
 
     @When("I request the endpoint {string}")
     public void iRequestTheEndpoint(String path) {
-        response  = this.restTemplate.getForEntity("http://localhost:8083" + path, String.class);
+        response = this.restTemplate.getForEntity("http://localhost:" + port + path, String.class);
     }
 
     @Then("the response should be {string}")
@@ -37,6 +33,6 @@ public class ApplicationVersion {
 
     @And("the status code is {int}")
     public void theStatusCodeIs(int statusCode) {
-        assertEquals(HttpStatusCode.valueOf(statusCode), response.getStatusCode());
+        assertEquals(statusCode, response.getStatusCodeValue());
     }
 }

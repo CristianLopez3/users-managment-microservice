@@ -1,15 +1,15 @@
 package com.cristian.tiusers;
 
-import static io.cucumber.core.options.Constants.GLUE_PROPERTY_NAME;
+import org.junit.runner.RunWith;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import org.junit.platform.suite.api.ConfigurationParameter;
-import org.junit.platform.suite.api.IncludeEngines;
-import org.junit.platform.suite.api.SelectClasspathResource;
-import org.junit.platform.suite.api.Suite;
-
-@Suite
-@IncludeEngines("cucumber")
-@SelectClasspathResource("features")
-@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "com.cristian.tiusers.steps")
+@RunWith(Cucumber.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@CucumberOptions(
+        features = "src/test/resources",
+        glue = {"com.cristian.tiusers.steps", "com.cristian.tiusers"} // Asegúrate de que este paquete es correcto
+)
 public class CucumberTest {
 }
