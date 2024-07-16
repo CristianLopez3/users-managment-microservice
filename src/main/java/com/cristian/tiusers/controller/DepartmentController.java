@@ -1,6 +1,5 @@
 package com.cristian.tiusers.controller;
 
-import com.cristian.tiusers.dto.CompanyDto;
 import com.cristian.tiusers.dto.DepartmentDto;
 import com.cristian.tiusers.service.DepartmentService;
 import jakarta.validation.Valid;

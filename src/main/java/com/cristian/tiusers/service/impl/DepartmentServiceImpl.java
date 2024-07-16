@@ -1,22 +1,20 @@
 package com.cristian.tiusers.service.impl;
 
-import com.cristian.tiusers.dto.CompanyDto;
 import com.cristian.tiusers.dto.DepartmentDto;
 import com.cristian.tiusers.exception.CompanyNotFound;
 import com.cristian.tiusers.exception.DepartmentNotFound;
-import com.cristian.tiusers.mapper.CompanyMapper;
+
 import com.cristian.tiusers.mapper.DepartmentMapper;
 import com.cristian.tiusers.model.Company;
 import com.cristian.tiusers.model.Department;
 import com.cristian.tiusers.repository.CompanyRepository;
 import com.cristian.tiusers.repository.DepartmentRepository;
-import com.cristian.tiusers.service.CompanyService;
 import com.cristian.tiusers.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
-import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor

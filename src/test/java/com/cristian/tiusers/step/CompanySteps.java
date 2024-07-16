@@ -6,6 +6,8 @@ import com.cristian.tiusers.service.CompanyService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.spring.ScenarioScope;
+import jakarta.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -16,11 +18,15 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-
+@ScenarioScope
 public class CompanySteps {
 
-    @Autowired
     private CompanyService companyService;
+
+    @Inject
+    public CompanySteps(CompanyService companyService) {
+        this.companyService = companyService;
+    }
 
     private RestTemplate restTemplate = new RestTemplate();
     private ResponseEntity<String> responseEntity;
@@ -65,16 +71,8 @@ public class CompanySteps {
 
     @When("the client sends a GET request to {string}")
     public void theClientSendsAGetRequestTo(String url) {
-        System.out.println("""
-                ==================================
-                ==================================
-                ==================================
-                ==================================
-                ==================================
-                ==================================
-                """);
         getAllResponse = restTemplate.getForEntity("http://localhost:8083" + url, CompanyDto[].class);
-        System.out.println("getting body " + getAllResponse.getBodimedy());
+        System.out.println("getting body " + getAllResponse.getBody());
     }
 
     @Then("the response should contain the following companies")
