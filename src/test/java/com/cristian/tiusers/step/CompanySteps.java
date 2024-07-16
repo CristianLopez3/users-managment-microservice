@@ -7,11 +7,15 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.hateoas.PagedModel;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -24,7 +28,7 @@ public class CompanySteps {
 
     private RestTemplate restTemplate = new RestTemplate();
     private ResponseEntity<String> responseEntity;
-    private ResponseEntity<CompanyDto[]> getAllResponse;
+    private PagedModel<CompanyDto> getAllResponse;
 
     @Given("a company with the following details")
     public void aCompanyWithTheFollowingDetails(Map<String, String> companyDetails) {
@@ -65,26 +69,21 @@ public class CompanySteps {
 
     @When("the client sends a GET request to {string}")
     public void theClientSendsAGetRequestTo(String url) {
-        System.out.println("""
-                ==================================
-                ==================================
-                ==================================
-                ==================================
-                ==================================
-                ==================================
-                """);
-        getAllResponse = restTemplate.getForEntity("http://localhost:8083" + url, CompanyDto[].class);
-        System.out.println("getting body " + getAllResponse.getBodimedy());
+        ParameterizedTypeReference<PagedModel<CompanyDto>> responseType = new ParameterizedTypeReference<PagedModel<CompanyDto>>() {};
+        ResponseEntity<PagedModel<CompanyDto>> response = restTemplate.exchange("http://localhost:8080" + url, HttpMethod.GET, null, responseType);
+        getAllResponse = response.getBody();
     }
 
     @Then("the response should contain the following companies")
     public void theResponseShouldContainTheFollowingCompanies(List<Map<String, String>> expectedCompanies) {
-        CompanyDto[] companies = getAllResponse.getBody();
-        assertEquals(expectedCompanies.size(), companies.length);
+        List<CompanyDto> companies = getAllResponse.getContent().stream().collect(Collectors.toList());
+        assertEquals(expectedCompanies.size(), companies.size());
 
         for (int i = 0; i < expectedCompanies.size(); i++) {
-            assertEquals(expectedCompanies.get(i).get("name"), companies[i].name());
-            assertEquals(expectedCompanies.get(i).get("address"), companies[i].address());
+            assertEquals(expectedCompanies.get(i).get("name"), companies.get(i).name());
+            assertEquals(expectedCompanies.get(i).get("address"), companies.get(i).address());
         }
     }
+
+
 }
