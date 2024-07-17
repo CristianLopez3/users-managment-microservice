@@ -22,9 +22,12 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import org.springframework.test.context.TestPropertySource;
 
 
 @RequiredArgsConstructor
+@TestPropertySource("classpath:application-test.yml")
+
 public class DepartmentSteps {
 
     @LocalServerPort

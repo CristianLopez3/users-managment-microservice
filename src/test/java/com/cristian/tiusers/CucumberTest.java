@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @CucumberOptions(
         features = "src/test/resources",
-        glue = {"com.cristian.tiusers.steps", "com.cristian.tiusers"} // Asegúrate de que este paquete es correcto
+        glue = {"com.cristian.tiusers.steps", "com.cristian.tiusers"}
 )
 public class CucumberTest {
 }
