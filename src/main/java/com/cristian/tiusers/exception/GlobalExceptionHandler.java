@@ -17,7 +17,20 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(DepartmentNotFound.class)
     public ResponseEntity<ApiError> departmentNotFound(DepartmentNotFound ex, HttpServletRequest request) {
-        logger.warn("Department not found");
+        logger.warn(ex.getMessage());
+        ApiError apiError = new ApiError(
+                request.getRequestURI(),
+                ex.getMessage(),
+                HttpStatus.NOT_FOUND.value(),
+                LocalDateTime.now()
+        );
+        return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
+    }
+
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ApiError> userNotFoundException(UserNotFoundException ex, HttpServletRequest request) {
+        logger.warn(ex.getMessage());
         ApiError apiError = new ApiError(
                 request.getRequestURI(),
                 ex.getMessage(),

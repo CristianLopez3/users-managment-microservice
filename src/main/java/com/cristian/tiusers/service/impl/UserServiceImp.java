@@ -4,6 +4,7 @@ import com.cristian.tiusers.dto.UserDto;
 import com.cristian.tiusers.dto.UserProjectionDto;
 import com.cristian.tiusers.exception.CompanyNotFound;
 import com.cristian.tiusers.exception.DepartmentNotFound;
+import com.cristian.tiusers.exception.UserNotFoundException;
 import com.cristian.tiusers.mapper.UserMapper;
 import com.cristian.tiusers.model.Company;
 import com.cristian.tiusers.model.Department;
@@ -14,12 +15,15 @@ import com.cristian.tiusers.repository.UserRepository;
 import com.cristian.tiusers.service.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
-import java.util.List;
+import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +33,7 @@ public class UserServiceImp implements UserService {
     private final CompanyRepository companyRepository;
     private final DepartmentRepository departmentRepository;
 
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImp.class);
 
     @Override
     @Transactional
@@ -60,7 +65,13 @@ public class UserServiceImp implements UserService {
 
     @Override
     public void deleteUserById(long id) {
-        userRepository.deleteById(id);
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> {
+                    logger.warn("User with id {} does not exist", id);
+                    return new UserNotFoundException("User not found with id: " + id);
+                });
+        userRepository.delete(user);
+        logger.info("User with id {} deleted successfully", id);
     }
 
 }
